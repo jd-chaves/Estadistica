@@ -32,14 +32,14 @@
 
 
 		#se plotea el histograma
-		jpeg("Histograma Beta(0.3,1).jpg")
-		hist(arr,main="Histograma Beta(0.3,1)");
+		jpeg("Histograma Beta(0.3,1).jpg",units="in", width=5, height=5, res=200)
+		hist(arr,main="Histograma Beta(0.3,1)",xlab="Valores muestra", ylab="Frecuencia");
 		dev.off();
 
 
 		#se plotea el qq-plot comparando la muestra del metodo F inversa con la muestra generada por R
-		jpeg("QQ Plot Beta(0.3,1).jpg")
-		qqplot(arr, rbeta(50000, 0.3, 1),main="QQ Plot Beta(0.3,1)");
+		jpeg("QQ Plot Beta(0.3,1).jpg",units="in", width=5, height=5, res=200)
+		qqplot(arr, rbeta(50000, 0.3, 1),main="QQ Plot Beta(0.3,1)",xlab="muestra F inversa", ylab="muestra R");
 		dev.off()
 
 
@@ -47,26 +47,26 @@
 		arr <- muestraBeta(1, 50000);
 
 		#se plotea el histograma
-		jpeg("Histograma Beta(1,1).jpg")
-		hist(arr,main="Histograma Beta(1,1)");	
+		jpeg("Histograma Beta(1,1).jpg",units="in", width=5, height=5, res=200)
+		hist(arr,main="Histograma Beta(1,1)",xlab="Valores muestra",ylab="Frecuencia");	
 		dev.off();
 
 		#se plotea el qq-plot comparando la muestra del metodo F inversa con la muestra generada por R
-		jpeg("QQ Plot Beta(1,1).jpg");
-		qqplot(arr, rbeta(50000, 1, 1),main="QQ Plot Beta(1,1)");
+		jpeg("QQ Plot Beta(1,1).jpg",units="in", width=5, height=5, res=200);
+		qqplot(arr, rbeta(50000, 1, 1),main="QQ Plot Beta(1,1)",xlab="muestra F inversa", ylab="muestra R");
 		dev.off();
 
 		#se genera una muestra de 50000 datos de una B(3,1)
 		arr <- muestraBeta(3, 50000);
 
 		#se plotea el histograma
-		jpeg("Histograma Beta(3,1).jpg");
-		hist(arr,main="Histograma Beta(3,1)");
+		jpeg("Histograma Beta(3,1).jpg",units="in", width=5, height=5, res=200);
+		hist(arr,main="Histograma Beta(3,1)",xlab="Valores muestra",ylab="Frecuencia");
 		dev.off();
 
 		#se plotea el qq-plot comparando la muestra del metodo F inversa con la muestra generada por R
-		jpeg("QQ Plot Beta(3,1).jpg");
-		qqplot(arr, rbeta(50000, 3, 1),main="QQ Plot Beta(3,1)");
+		jpeg("QQ Plot Beta(3,1).jpg",units="in", width=5, height=5, res=200);
+		qqplot(arr, rbeta(50000, 3, 1),main="QQ Plot Beta(3,1)",xlab="muestra F inversa", ylab="muestra R");
 		dev.off();
 	}
 
@@ -135,8 +135,8 @@
 		#se plotea el boxplot de ambos estimadores, note que cuando se llaman las funciones 
 		#simulacionMomentos y simulacionVerosimilitud quedan almacenados los valores de los estimadores
 		#en las variables globales estimadoresMomentos y estimadoresVerosimilitud, respectivamente
-		jpeg(paste("boxplot alpha=",alpha," n=",n,".jpg", sep=""));
-		boxplot(estimadoresMomentos, estimadoresVerosimilitud, main=paste("boxplot alpha=",alpha," n=",n, sep=""));
+		jpeg(paste("boxplot alpha=",alpha," n=",n,".jpg", sep=""),units="in", width=5, height=5, res=200);
+		boxplot(estimadoresMomentos, estimadoresVerosimilitud, main=paste("boxplot alpha=",alpha," n=",n, sep=""),names=(c("momentos", "verosimilitud")));
 		dev.off();
 
 		#se retorna un vector de tamanho 2 que contiene los errores cuadraticos medios de los estimadores
@@ -163,9 +163,12 @@
 		eficienciasRelativas <<- resp[impar]/resp[par];
 
 		#se plotea la grafica de ambos estimadores en escala logaritmica
-		jpeg(paste("logaritmica alpha=",alpha,".jpg", sep=""));
-		plot(n, type="o",resp[par], col="red", log="xy", main = paste("logaritmica alpha=",alpha, sep=""));
+		jpeg(paste("logaritmica alpha=",alpha,".jpg", sep=""),units="in", width=5, height=5, res=200);
+		plot(n, type="o",resp[par], col="red", log="xy", main = paste("ln(n) vs ln(ECM()), alpha=",alpha, sep=""),xlab="Tamanho muestra",ylab="Error cuadratico medio");
 		lines(n,type="o", col="blue", resp[impar]);
+		legend("bottomleft", legend=c("Momentos", "Verosimilitud"),
+       col=c("blue", "red"),lty = 1:7,
+       pch = "o",  inset = .05);
 		dev.off();
 	}
 
