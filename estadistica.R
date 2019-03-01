@@ -33,13 +33,13 @@
 
 		#se plotea el histograma
 		jpeg("Histograma Beta(0.3,1).jpg")
-		hist(arr);
+		hist(arr,main="Histograma Beta(0.3,1)");
 		dev.off();
 
 
 		#se plotea el qq-plot comparando la muestra del metodo F inversa con la muestra generada por R
 		jpeg("QQ Plot Beta(0.3,1).jpg")
-		qqplot(arr, rbeta(50000, 0.3, 1));
+		qqplot(arr, rbeta(50000, 0.3, 1),main="QQ Plot Beta(0.3,1)");
 		dev.off()
 
 
@@ -48,12 +48,12 @@
 
 		#se plotea el histograma
 		jpeg("Histograma Beta(1,1).jpg")
-		hist(arr);	
+		hist(arr,main="Histograma Beta(1,1)");	
 		dev.off();
 
 		#se plotea el qq-plot comparando la muestra del metodo F inversa con la muestra generada por R
 		jpeg("QQ Plot Beta(1,1).jpg");
-		qqplot(arr, rbeta(50000, 1, 1));
+		qqplot(arr, rbeta(50000, 1, 1),main="QQ Plot Beta(1,1)");
 		dev.off();
 
 		#se genera una muestra de 50000 datos de una B(3,1)
@@ -61,12 +61,12 @@
 
 		#se plotea el histograma
 		jpeg("Histograma Beta(3,1).jpg");
-		hist(arr);
+		hist(arr,main="Histograma Beta(3,1)");
 		dev.off();
 
 		#se plotea el qq-plot comparando la muestra del metodo F inversa con la muestra generada por R
 		jpeg("QQ Plot Beta(3,1).jpg");
-		qqplot(arr, rbeta(50000, 3, 1));
+		qqplot(arr, rbeta(50000, 3, 1),main="QQ Plot Beta(3,1)");
 		dev.off();
 	}
 
@@ -136,7 +136,7 @@
 		#simulacionMomentos y simulacionVerosimilitud quedan almacenados los valores de los estimadores
 		#en las variables globales estimadoresMomentos y estimadoresVerosimilitud, respectivamente
 		jpeg(paste("boxplot alpha=",alpha," n=",n,".jpg", sep=""));
-		boxplot(estimadoresMomentos, estimadoresVerosimilitud);
+		boxplot(estimadoresMomentos, estimadoresVerosimilitud, main=paste("boxplot alpha=",alpha," n=",n, sep=""));
 		dev.off();
 
 		#se retorna un vector de tamanho 2 que contiene los errores cuadraticos medios de los estimadores
@@ -164,7 +164,7 @@
 
 		#se plotea la grafica de ambos estimadores en escala logaritmica
 		jpeg(paste("logaritmica alpha=",alpha,".jpg", sep=""));
-		plot(n, type="o",resp[par], col="red", log="xy");
+		plot(n, type="o",resp[par], col="red", log="xy", main = paste("logaritmica alpha=",alpha, sep=""));
 		lines(n,type="o", col="blue", resp[impar]);
 		dev.off();
 	}
@@ -173,7 +173,7 @@
 	principal <- function()
 	{
 		#se crea el directorio que almacenara las graficas
-		dir.create("Proyecto1 Chaves-Perez")
+		make.dir("Proyecto1 Chaves-Perez");
 		setwd("Proyecto1 Chaves-Perez");
 
 		#se corre la parte 1 del proyecto
@@ -187,3 +187,14 @@
 
 		setwd("..");
 	}
+
+
+	make.dir <- function(fp) {
+		if(!file.exists(fp)) {  # If the folder does not exist, create a new one
+		make.dir(dirname(fp))
+		dir.create(fp)
+		} else {   # If it existed, delete and replace with a new one  
+		unlink(fp, recursive = TRUE)
+		dir.create(fp)
+  	}
+} 
