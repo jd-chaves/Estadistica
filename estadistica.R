@@ -140,7 +140,7 @@
 	}
 
 	#funcion que corre la simulacion para un alpha dado
-	graficas <- function(alpha)
+	graficas <- function(param)
 	{
 		#se declara un arreglo con los n que dice el enunciado
 		n <- c(50,100,200,500,1000);
@@ -149,7 +149,7 @@
 		impar <- seq(1, 9, by=2);
 
 		#se calculan para cada n los valores de los estimadores (a partir de las 500 muestras)
-		resp <<- unlist(lapply(n, simulacion, alpha=alpha));
+		resp <<- unlist(lapply(n, simulacion, alpha=param));
 
 		#preguntarle a Adolfo que hago con las eficiencias relativas
 
@@ -157,8 +157,8 @@
 		eficienciasRelativas <<- resp[impar]/resp[par];
 
 		#se plotea la grafica de ambos estimadores en escala logaritmica
-		jpeg(paste("logaritmica alpha=",alpha,".jpg", sep=""),units="in", width=5, height=5, res=200);
-		plot(log(n), log(resp[par]), type="o",col="red", main = paste("ln(n) vs ln(ECM()), alpha=",alpha, sep=""),
+		jpeg(paste("logaritmica alpha=",param,".jpg", sep=""),units="in", width=5, height=5, res=200);
+		plot(log(n), log(resp[par]), type="o",col="red", main = bquote(paste("ln(n) vs ln(ECM(", theta,")), alpha=",.(param), sep="")),
 			xlab="Tamanho muestra",ylab="Error cuadratico medio", ylim=c(min(log(resp[par])),max(log(resp[impar]))));
 		lines(log(n),type="o", col="blue", log(resp[impar]));
 		legend("bottomleft", legend=c("Momentos", "Verosimilitud"),
