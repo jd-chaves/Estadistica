@@ -158,9 +158,9 @@
 
 		#se plotea la grafica de ambos estimadores en escala logaritmica
 		jpeg(paste("logaritmica alpha=",alpha,".jpg", sep=""),units="in", width=5, height=5, res=200);
-		plot(n, type="o",resp[par], col="red", log="xy", main = paste("ln(n) vs ln(ECM()), alpha=",alpha, sep=""),
-			xlab="Tamanho muestra",ylab="Error cuadratico medio");
-		lines(n,type="o", col="blue", resp[impar]);
+		plot(log(n), log(resp[par]), type="o",col="red", main = paste("ln(n) vs ln(ECM()), alpha=",alpha, sep=""),
+			xlab="Tamanho muestra",ylab="Error cuadratico medio", ylim=c(min(log(resp[par])),max(log(resp[impar]))));
+		lines(log(n),type="o", col="blue", log(resp[impar]));
 		legend("bottomleft", legend=c("Momentos", "Verosimilitud"),
        		col=c("blue", "red"),lty = c(1,1),
       		pch = "o",  inset = .05);
