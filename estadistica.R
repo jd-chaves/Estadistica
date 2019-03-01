@@ -9,8 +9,7 @@
 	#este vector almacena los 500 valores calculados del estimador de momentos, uno por cada muestra
 	estimadoresMomentos <- c();
 	
-	#este vector almacena los 500 valores calculados del estimador de maxima verosimilitud, uno por 
-	#cada muestra
+	#este vector almacena los 500 valores calculados del estimador de maxima verosimilitud, uno por cada muestra
 	estimadoresVerosimilitud <- c();
 	
 	#variable global que almacena las eficiencias relaticvas para cada n
@@ -83,8 +82,7 @@
     	return(-length(param)/sum(unlist(lapply(param,log))));
 	}
 
-	#funcion que calcula para cada muestra el valor del estimador de momentos y retorna el error cuadratico
-	#medio de dicho estimador
+	#funcion que calcula para cada muestra el valor del estimador de momentos y retorna el error cuadratico medio de dicho estimador
 	simulacionMomentos <- function(alpha)
 	{
 		#se calculan los estimadores de momentos para cada una de las 500 muestras
@@ -101,8 +99,7 @@
 		return(ecmMomentos);
 	}
 	
-	#funcion que calcula para cada muestra el valor del estimador de maxima verosimilitud y retorna el error 
-	#cuadratico medio de dicho estimador
+	#funcion que calcula para cada muestra el valor del estimador de maxima verosimilitud y retorna el error cuadratico medio de dicho estimador
 	simulacionVerosimilitud <- function(alpha)
 	{
 		#se calculan los estimadores de macima verosimilitud para cada una de las 500 muestras 
@@ -132,11 +129,10 @@
 		#se calcula el error cuadratico medio del estimador de maxima verosimilitud
 		ecmVerosimilitud <- simulacionVerosimilitud(alpha);
 
-		#se plotea el boxplot de ambos estimadores, note que cuando se llaman las funciones 
-		#simulacionMomentos y simulacionVerosimilitud quedan almacenados los valores de los estimadores
-		#en las variables globales estimadoresMomentos y estimadoresVerosimilitud, respectivamente
+		#se plotea el boxplot de ambos estimadores, note que cuando se llaman las funciones simulacionMomentos y simulacionVerosimilitud quedan almacenados los valores de los estimadores en las variables globales estimadoresMomentos y estimadoresVerosimilitud respectivamente
 		jpeg(paste("boxplot alpha=",alpha," n=",n,".jpg", sep=""),units="in", width=5, height=5, res=200);
-		boxplot(estimadoresMomentos, estimadoresVerosimilitud, main=paste("boxplot alpha=",alpha," n=",n, sep=""),names=(c("momentos", "verosimilitud")));
+		boxplot(estimadoresMomentos, estimadoresVerosimilitud, main=paste("boxplot alpha=",alpha," n=",n, sep=""),
+			names=(c("momentos", "verosimilitud")));
 		dev.off();
 
 		#se retorna un vector de tamanho 2 que contiene los errores cuadraticos medios de los estimadores
@@ -157,18 +153,17 @@
 
 		#preguntarle a Adolfo que hago con las eficiencias relativas
 
-		#se calculan las eficiencias relativas, los valores del estimador de momentos estan en las 
-		#posiciones impares del arreglo y los valores del estimador de maxima verosimilitud estan en 
-		#las posiciones impares
+		#se calculan las eficiencias relativas, los valores del estimador de momentos estan en las posiciones impares del arreglo y los valores del estimador de maxima verosimilitud estan en las posiciones impares
 		eficienciasRelativas <<- resp[impar]/resp[par];
 
 		#se plotea la grafica de ambos estimadores en escala logaritmica
 		jpeg(paste("logaritmica alpha=",alpha,".jpg", sep=""),units="in", width=5, height=5, res=200);
-		plot(n, type="o",resp[par], col="red", log="xy", main = paste("ln(n) vs ln(ECM()), alpha=",alpha, sep=""),xlab="Tamanho muestra",ylab="Error cuadratico medio");
+		plot(n, type="o",resp[par], col="red", log="xy", main = paste("ln(n) vs ln(ECM()), alpha=",alpha, sep=""),
+			xlab="Tamanho muestra",ylab="Error cuadratico medio");
 		lines(n,type="o", col="blue", resp[impar]);
 		legend("bottomleft", legend=c("Momentos", "Verosimilitud"),
-       col=c("blue", "red"),lty = 1:7,
-       pch = "o",  inset = .05);
+       		col=c("blue", "red"),lty = c(1,1),
+      		pch = "o",  inset = .05);
 		dev.off();
 	}
 
@@ -193,9 +188,9 @@
 
 
 	make.dir <- function(fp) {
-		if(!file.exists(fp)) {  # If the folder does not exist, create a new one
+		if(!file.exists(fp)) {  
 		dir.create(fp)
-		} else {   # If it existed, delete and replace with a new one  
+		} else {     
 		unlink(fp, recursive = TRUE)
 		dir.create(fp)
   	}
