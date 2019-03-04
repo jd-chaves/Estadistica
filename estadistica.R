@@ -95,6 +95,12 @@
 		#se calcula el error cuadratico medio del estimador de momentos
 		ecmMomentos <- varMomentos + sesgoMomentos^2;
 
+
+		cat("\n\nEstimador de momentos: ")
+		cat("\n Sesgo: ", sesgoMomentos);
+		cat("\n Varianza: ", varMomentos);
+		cat("\n ECM: ", ecmMomentos);
+
 		#se retorna el error cuadratico medio del estimador de momentos
 		return(ecmMomentos);
 	}
@@ -112,6 +118,13 @@
 		#se calcula el error cuadratico medio del estimador de maxima verosimilitud
 		ecmVerosimilitud <- varVerosimilitud + sesgoVerosimilitud^2;
 
+		cat("\n\nEstimador de maxima verosimilitud: ")
+		cat("\n Sesgo: ", sesgoVerosimilitud);
+		cat("\n Varianza: ", varVerosimilitud);
+		cat("\n ECM: ", ecmVerosimilitud);
+		cat("\n\n");
+
+
 		#se retorna el error cuadratico medio del estimador de maxima verosimilitud
 		return(ecmVerosimilitud);	
 	}
@@ -119,6 +132,9 @@
 
 	simulacion <- function(alpha, n)
 	{
+
+		cat(paste("\nValores importante de los estimadores, alpha=", alpha, ", n=",n))
+
 		#se crean 500 muestras de tamanho n de una Beta(alpha, 1)
 		x <<- replicate(500, muestraBeta(alpha,n));
 		#se convierte x en una lista de listas
