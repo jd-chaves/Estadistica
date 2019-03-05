@@ -95,7 +95,6 @@
 		#se calcula el error cuadratico medio del estimador de momentos
 		ecmMomentos <- varMomentos + sesgoMomentos^2;
 
-
 		cat("\n\nEstimador de momentos: ")
 		cat("\n Sesgo: ", sesgoMomentos);
 		cat("\n Varianza: ", varMomentos);
@@ -116,14 +115,13 @@
 		#se calcula la varianza de los 500 valores calculados para el estimador de maxima verosimilitud
 		varVerosimilitud <- var(estimadoresVerosimilitud);
 		#se calcula el error cuadratico medio del estimador de maxima verosimilitud
-		ecmVerosimilitud <- varVerosimilitud + sesgoVerosimilitud^2;
+		ecmVerosimilitud <- varVerosimiliesgoVerosimilitud^2;
 
 		cat("\n\nEstimador de maxima verosimilitud: ")
 		cat("\n Sesgo: ", sesgoVerosimilitud);
 		cat("\n Varianza: ", varVerosimilitud);
 		cat("\n ECM: ", ecmVerosimilitud);
 		cat("\n\n");
-
 
 		#se retorna el error cuadratico medio del estimador de maxima verosimilitud
 		return(ecmVerosimilitud);	
@@ -170,7 +168,7 @@
 		#preguntarle a Adolfo que hago con las eficiencias relativas
 
 		#se calculan las eficiencias relativas, los valores del estimador de momentos estan en las posiciones impares del arreglo y los valores del estimador de maxima verosimilitud estan en las posiciones impares
-		eficienciasRelativas <<- resp[impar]/resp[par];
+		eficienciasRelativas <<- resp[par]/resp[impar];
 
 		#se plotea la grafica de ambos estimadores en escala logaritmica
 		jpeg(paste("logaritmicaalpha",param,".jpg", sep=""),units="in", width=5, height=5, res=200);
@@ -201,7 +199,6 @@
 
 		setwd("..");
 	}
-
 
 	make.dir <- function(fp) {
 		if(!file.exists(fp)) {  
